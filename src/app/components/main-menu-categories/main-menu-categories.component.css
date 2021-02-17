@@ -1,0 +1,8 @@
+@media screen and (max-width: 800px) {
+    .seller-card {
+        margin: 10px 40px 10px 40px;
+    }
+    .image-sell {
+        width: 65%;
+    }
+}

@@ -1,0 +1,352 @@
+<app-firstnav></app-firstnav>
+
+<section>
+    <owl-carousel-o [options]="customOptions">
+        <ng-container>
+            <ng-template carouselSlide *ngFor="let type of slidedata; index as i">
+                <!-- <div class="owl-carousel owl-theme owl-data" id="fruits-offers"> -->
+                <div class="item new-images">
+                    <!-- <img class="images-data" src="../../../assets/images/images1.jpg" alt="no images"> -->
+                    <img class="images-data" src="{{type?.slider_image}}" alt="no images">
+                </div>
+                <!-- <div class="item new-images" *ngFor="let type of slidedata;">
+            <img class="images-data" src="{{type?.slider_image}}" alt="no images">
+        </div> -->
+                <!-- <div class="item new-images">
+            <img class="images-data" src="../../../assets/images/images1.jpg" alt="no images">
+        </div>
+        <div class="item new-images">
+            <img class="images-data" src="../../../assets/images/images2.jpg" alt="no images">
+        </div>
+        <div class="item new-images">
+            <img class="images-data" src="../../../assets/images/images1.jpg" alt="no images">
+        </div>
+        <div class="item new-images">
+            <img class="images-data" src="../../../assets/images/images2.jpg" alt="no images">
+        </div> -->
+                <!-- </div> -->
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+
+
+    <div class="bestfruits">
+        <div class="container-fluid ">
+            <div class="special-options">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card always-fresh">
+                            <div class="new-freshdata">
+                                <img class="card-img-top fresh-image" src="../../../assets/images/Artboard 1.png" alt="Card image cap">
+
+                            </div>
+                            <div class="card-body p-0">
+                                <h5 class="card-title always-title">ALWAYS FRESH</h5>
+                                <p class="card-text always-subtitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card always-fresh">
+                            <div class="new-freshdata">
+                                <img class="card-img-top fresh-image" src="../../../assets/images/Artboard 2.png" alt="Card image cap">
+
+                            </div>
+                            <div class="card-body p-0">
+                                <h5 class="card-title always-title">ALWAYS FRESH</h5>
+                                <p class="card-text always-subtitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card always-fresh">
+                            <div class="new-freshdata">
+                                <img class="card-img-top fresh-image" src="../../../assets/images/Artboard 3.png" alt="Card image cap">
+
+                            </div>
+                            <div class="card-body p-0">
+                                <h5 class="card-title always-title">ALWAYS FRESH</h5>
+                                <p class="card-text always-subtitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <ul class="best-seller">
+                <li class="best-sellertitle">Best Seller</li>
+                <li class="ml-auto"><a class="see-more" routerLink='/Best-seller' routerLinkActive="router-link-active">See More</a></li>
+            </ul>
+            <div class="row">
+                <div class="col-md-3 seller-card" *ngFor="let item of bestsellers; let i=index" (click)="getProductsbyId(item)">
+                    <div class="card seller-content">
+                        <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
+                        </div>
+                        <div class="card-body fruit-info">
+                            <h5 class="card-title title-name">{{item?.product_title}}</h5>
+                            <p class="card-text price-per">Price per kg </p>
+                            <ul class="price-data">
+                                <li>
+                                    <p class="price">INR {{item?.product_price}}</p>
+                                </li>
+                                <!-- <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li> -->
+                                <li class="rate-image ml-auto">
+
+                                    <button class="btn btn-success" id="addcartbtn">Add to cart</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="card seller-content">
+                        <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 8.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body fruit-info">
+                            <h5 class="card-title title-name">Kashmir Apple</h5>
+                            <p class="card-text price-per">Price per kg </p>
+                            <ul class="price-data">
+                                <li>
+                                    <p class="price">INR 150</p>
+                                </li>
+                                <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <div class="card seller-content">
+                        <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 9.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body fruit-info">
+                            <h5 class="card-title title-name">Kashmir Apple</h5>
+                            <p class="card-text price-per">Price per kg </p>
+                            <ul class="price-data">
+                                <li>
+                                    <p class="price">INR 150</p>
+                                </li>
+                                <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <div class="card seller-content">
+                        <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 7.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body fruit-info">
+                            <h5 class="card-title title-name">Kashmir Apple</h5>
+                            <p class="card-text price-per">Price per kg </p>
+                            <ul class="price-data">
+                                <li>
+                                    <p class="price">INR 150</p>
+                                </li>
+                                <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <div class="card seller-content">
+                        <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 8.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body fruit-info">
+                            <h5 class="card-title title-name">Kashmir Apple</h5>
+                            <p class="card-text price-per">Price per kg </p>
+                            <ul class="price-data">
+                                <li>
+                                    <p class="price">INR 150</p>
+                                </li>
+                                <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <div class="card seller-content">
+                        <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 9.png" alt="Card image cap">
+                        </div>
+                        <div class="card-body fruit-info">
+                            <h5 class="card-title title-name">Kashmir Apple</h5>
+                            <p class="card-text price-per">Price per kg </p>
+                            <ul class="price-data">
+                                <li>
+                                    <p class="price">INR 150</p>
+                                </li>
+                                <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
+                </div> -->
+
+            </div>
+            <ul class="best-seller mt-4">
+                <li class="best-sellertitle">Recommend for you</li>
+                <li class="ml-auto"><a class="see-more" routerLink='/recommended-products' routerLinkActive="router-link-active">See More</a></li>
+            </ul>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container>
+                  <ng-template carouselSlide *ngFor="let item of recommended; let i=index">
+      <!-- <div class="card new-lastowl"> -->
+          <div class="item new-imgcontet">
+            <div class="card seller-content" (click)="getProductsbyId(item)">
+                <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
+                </div>
+                <div class="card-body fruit-info">
+                    <h5 class="card-title title-name">{{item?.product_title}}</h5>
+                    <p class="card-text price-per">Price per kg </p>
+                    <ul class="price-data">
+                        <li>
+                            <p class="price">INR {{item?.product_price}}</p>
+                        </li>
+                        <li class="rate-image ml-auto">
+                            <button class="btn btn-success" id="addcartbtn">Add to cart</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+          </div>
+        </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+
+
+        </div>
+    </div>
+
+
+
+</section>
+
+
+<!-- login Modal -->
+<div class="modal fade modal-fullscreen" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content login-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Login</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="login-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="login-left">
+                                <h3 class="vertuca-title">
+                                    Login
+                                </h3>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="login-right">
+                                <form class="loginform">
+                                    <div class="form-group">
+                                        <label class="new-labdata" for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control inpu-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Virtuca@gmail.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="new-labdata" for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control inpu-login" id="exampleInputPassword1" placeholder="******">
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary signin-btn">Sign In</button>
+                                    <ul class="forgot-pw">
+                                        <li><a href="#" class="forgot">Forgot Password?</a></li>
+                                        <li class="ml-auto"><a href="#" class="sign-up" data-toggle="modal" data-target="#sign-up">Sign Up</a></li>
+                                    </ul>
+                                </form>
+
+                            </div>
+                            <div class="container">
+                                <ul class="tc-data justify-content-between">
+                                    <li class="terms-conditions">© 2020 Virtuca</li>
+                                    <li class="terms-conditions">Privacy Policy</li>
+                                    <li class="terms-conditions">Terms & Conditions</li>
+                                </ul>
+                            </div>
+                        </div> -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- sign up Modal -->
+<!-- <div class="modal fade modal-fullscreen" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content login-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="login-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="login-left">
+                                <h3 class="vertuca-title">
+                                    Sign Up
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="login-right">
+                                <form class="loginform">
+                                    <div class="form-group">
+                                        <label class="new-labdata" for="exampleInputEmail1">User Name</label>
+                                        <input type="email" class="form-control inpu-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="new-labdata" for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control inpu-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fruit@gmail.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="new-labdata" for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control inpu-login" id="exampleInputPassword1" placeholder="******">
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary signin-btn">Sign Up</button>
+                                    <ul class="forgot-pw">
+                                        <li><a href="#" class="forgot">Forgot Password?</a></li>
+                                        <li class="ml-auto"><a href="#" class="sign-up" data-toggle="modal" data-target="#login">Sign Up</a></li>
+                                    </ul>
+                                </form>
+
+                            </div>
+                            <div class="container">
+                                <ul class="tc-data justify-content-between">
+                                    <li class="terms-conditions">© 2020 Virtuca</li>
+                                    <li class="terms-conditions">Privacy Policy</li>
+                                    <li class="terms-conditions">Terms & Conditions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<app-footer></app-footer>

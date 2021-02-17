@@ -1,0 +1,56 @@
+.help-block2 {
+    width: 100%;
+    height: auto;
+    margin: 5px 0px;
+}
+
+@media (max-width: 575.98px) {
+    .new-otpres {
+        padding: 0px;
+    }
+}
+
+.asd {
+    margin-top: 3px;
+}
+
+.faloginuser {
+    margin-top: 10px;
+}
+
+#navbarDropdownList ul li :hover {
+    background-color: #FF8800;
+    font-size: 16px;
+    color: cornsilk;
+    border-radius: 30px;
+}
+
+#navbarDropdownList ul {
+    background-color: #fff;
+    /* background-color: #7CB734; */
+    border-radius: 30px;
+    width: 235px;
+}
+@media (max-width: 575.98px) {
+    .new-otpres {
+        padding: 0px;
+    }
+    .asd {
+        margin-top: 7px;
+    }
+}
+
+.asd {
+    margin-top: 3px;
+}
+
+@media (max-width: 360px) {
+    .Jayabhery_media {
+        /* margin: 30px; */
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .top_jayabhery {
+        margin-right: 0px !important;
+    }
+}

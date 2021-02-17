@@ -1,0 +1,249 @@
+<app-firstnav></app-firstnav>
+
+<div class="profile-details">
+    <div class="container">
+        <!-- <h3 class="pathlist"><span [routerLink]="['/landing']">Home</span>/ Profile</h3> -->
+        <div class="profile-data" *ngFor="let item of profile;">
+            <ul class="profile-name">
+                <li class="name-data">{{item?.first_name}} {{item?.last_name}}</li>
+                <li><button class="edit-btn" data-toggle="modal" data-target="#editmodal" (click)="editProfile(item)">( <i class="fas fa-edit"></i>)</button></li>
+            </ul>
+            <p class="extra-data">{{item?.email}}</p>
+            <p class="extra-data">{{item?.gender}}</p>
+            <p class="extra-data">+(91) {{item?.phone}}</p>
+            <!-- <p class="extra-data">Balaji Empire, 3rd Floor, Pan Shop, Jayabheri Enclave, Gachibowli, Hyderabad, Telangana - 500032</p> -->
+            <ul class="add-newaddress">
+                <li class="title-address">Address</li>
+                <li><a class="new-cls" data-toggle="modal" data-target="#addaddress">Add New Address</a></li>
+            </ul>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of address; let i=index">
+                    <div class="address-card" *ngIf= "item?.address != null" >
+                        <div class="address-content">
+                            <ul class="address-default">
+                                <li class="home" style="font-size: 14px;">Home</li>
+                                <!-- <li class="default-btn ml-auto">Default</li> -->
+                            </ul>
+
+                            <p class="total-address" style="color: #000; font-size: 17px;">
+                                {{item?.address}} <br/> {{item?.Landmark}} <br/> {{item?.state}}<br/> {{item?.pin_code}}
+                            </p>
+
+                            <a class="edit-btn" style="color: blue; font-size: 14px;" data-toggle="modal" data-target="#editaddress" (click)="editAddress(item)">Edit</a>
+                            <!-- <div class="delivery-content"> -->
+                            <!-- </div> -->
+
+                        </div>
+
+                    </div>
+                    <div class="no-data" *ngIf="item?.address == null">No Data</div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- edit  Modal -->
+<div class="modal fade" style="z-index: 9999;" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content edit-data">
+
+            <div class="modal-body">
+                <form [formGroup]="profileForm" (ngSubmit)="profileUpdate()">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Profile Pic</label>
+                        <!-- <button class="file-upload">             -->
+                            <input #file type="file" style="margin-left: 20px;" id="prof" class="upload-file"
+                            accept='image/*'
+                            (change)="upload($event.target.files);" />
+                          <!-- </button> -->
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">First Name</label>
+                        <input type="text" class="form-control inp-txt" placeholder="Enter First Name" formControlName="first_name" [(ngModel)]="profileObj.first_name" required />
+                        <div class="help-block2" *ngIf="profileForm.get('first_name').invalid && (profileForm.get('first_name').touched || profileForm.get('first_name').dirty)">
+                            <div class="text-danger" *ngIf="profileForm.get('first_name').errors.required">
+                                first_name is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Last Name</label>
+                        <input type="text" class="form-control inp-txt" placeholder="Enter Last Name" formControlName="last_name" [(ngModel)]="profileObj.last_name" required />
+                        <div class="help-block2" *ngIf="profileForm.get('last_name').invalid && (profileForm.get('last_name').touched || profileForm.get('last_name').dirty)">
+                            <div class="text-danger" *ngIf="profileForm.get('last_name').errors.required">
+                                last_name is required*
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Email</label>
+                        <input type="email" class="form-control inp-txt" placeholder="Enter Email" formControlName="email" [(ngModel)]="profileObj.email" required />
+                        <div class="help-block2" *ngIf="profileForm.get('email').invalid && (profileForm.get('email').touched || profileForm.get('email').dirty)">
+                            <div class="text-danger" *ngIf="profileForm.get('email').errors.required">
+                                email is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Gender
+                            </label>
+                        <div class="col-sm-7 position-relative mb-3">
+                            <div class="col-sm-9">
+                                <div class="custom-control custom-radio custom-control col-9">
+                                    <input type="radio" id="male" name="options" [checked]="male" class="
+    custom-control-input" (click)="gender(1)">
+                                    <label class="custom-control-label" for="male">Male</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control col-9">
+                                    <input type="radio" id="female" name="options" [checked]="female" class="
+    custom-control-input" (click)="gender(0)">
+                                    <label class="custom-control-label" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">address</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">State</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Pincode</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+                    </div> -->
+
+                    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!profileForm.valid">Submit</button>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Add Address  Modal -->
+<div class="modal fade" style="z-index: 9999;" id="addaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content edit-data">
+
+            <div class="modal-body">
+                <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Address</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Address" formControlName="address" [(ngModel)]="addressObj.address" required />
+                        <div class="help-block2" *ngIf="addressForm.get('address').invalid && (addressForm.get('address').touched || addressForm.get('address').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('address').errors.required">
+                                address is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Landmark</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Landmark" formControlName="landmark" [(ngModel)]="addressObj.landmark" required />
+                        <div class="help-block2" *ngIf="addressForm.get('landmark').invalid && (addressForm.get('landmark').touched || addressForm.get('landmark').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('landmark').errors.required">
+                                landmark is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">State</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="State" formControlName="state" [(ngModel)]="addressObj.state" required />
+                        <div class="help-block2" *ngIf="addressForm.get('state').invalid && (addressForm.get('state').touched || addressForm.get('state').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('state').errors.required">
+                                state is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Pincode</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Pincode" formControlName="pin_code" [(ngModel)]="addressObj.pin_code" required />
+                        <div class="help-block2" *ngIf="addressForm.get('pin_code').invalid && (addressForm.get('pin_code').touched || addressForm.get('pin_code').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('pin_code').errors.required">
+                                pin_code is required*
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!addressForm.valid">Submit</button>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Edit Address  Modal -->
+<div class="modal fade" style="z-index: 9999;" id="editaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content edit-data">
+
+            <div class="modal-body">
+                <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Address</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Address" formControlName="address" [(ngModel)]="addressObj.address" required />
+                        <div class="help-block2" *ngIf="addressForm.get('address').invalid && (addressForm.get('address').touched || addressForm.get('address').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('address').errors.required">
+                                address is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Landmark</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Landmark" formControlName="landmark" [(ngModel)]="addressObj.landmark" required />
+                        <div class="help-block2" *ngIf="addressForm.get('landmark').invalid && (addressForm.get('landmark').touched || addressForm.get('landmark').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('landmark').errors.required">
+                                landmark is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">State</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="State" formControlName="state" [(ngModel)]="addressObj.state" required />
+                        <div class="help-block2" *ngIf="addressForm.get('state').invalid && (addressForm.get('state').touched || addressForm.get('state').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('state').errors.required">
+                                state is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label inp-title">Pincode</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Pincode" formControlName="pin_code" [(ngModel)]="addressObj.pin_code" required />
+                        <div class="help-block2" *ngIf="addressForm.get('pin_code').invalid && (addressForm.get('pin_code').touched || addressForm.get('pin_code').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('pin_code').errors.required">
+                                pin_code is required*
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!addressForm.valid">Submit</button>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

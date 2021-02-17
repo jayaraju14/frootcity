@@ -1,0 +1,441 @@
+<div class="fruits-content" *ngIf="isLogin">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg ">
+            <a class="navbar-brand logo-data" *ngIf="!isLogin" [routerLink]="['/landing']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <a class="navbar-brand logo-data" *ngIf="isLogin" [routerLink]="['/home']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button> -->
+
+
+            <div class="sidenav-btn">
+
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+        </button>
+            </div>
+
+
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                <div>
+                    <ul class="navbar-nav top-header top_jayabhery">
+                    <li class="nav-item active">
+
+                        <div class="media loacation-content Jayabhery_media">
+                            <div class="loaction ">
+                                <i class="fas fa-map-marker-alt loco-icons"></i>
+                            </div>
+                            <div class="media-body ">
+                                <h5 class="title-loca mt-0">Jayabhery Enclave</h5>
+                                <p class="subtitle-content">Gachibowli,hyderabad,500034</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-auto">
+                        <form class="form-inline">
+                            <input class="form-control search-data" #textbox type="text" [(ngModel)]="textValue"
+                            required placeholder="Search for Products..." aria-label="Search" [ngModelOptions]="{standalone: true}">
+                            <button class="btn btn-outline-success search-button" type="submit" (click)="logText(textbox.value)"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a *ngIf="profilepic == ''" class="nav-link new-profiledata  dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img  src="../../../assets/images/Group 31234.png" width="25px" class="rounded-circle img-data mr-1" alt="">{{firstname}} {{lastname}}
+                            <!-- <img *ngIf="profilepic != null" src="{{profilepic}}" width="25px" class="rounded-circle img-data mr-1" alt="">{{firstname}} {{lastname}} -->
+                        </a>
+                        <a *ngIf="profilepic != ''" class="nav-link new-profiledata  dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{profilepic}}" width="25px" class="rounded-circle img-data mr-1" alt="">{{firstname}} {{lastname}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                            <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Account</a>
+                            <a class="dropdown-item" [routerLink]="['/my-orders']" routerLinkActive="router-link-active">My Orders</a>
+                            <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Wishlist</a>
+                            <a class="dropdown-item" [routerLink]="['/landing']" (click)="logout()">Logout</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-2 mr-2">
+
+                        <!-- <a class="loaction">
+                            <i class="fas fa-bell loco-icons"></i>
+                        </a> -->
+                    </li>
+                    <li class="nav-item ml-2 mr-2">
+                        <button class="loaction" [routerLink]="['/cart']" routerLinkActive="router-link-active">
+                            <i class="fas fa-shopping-cart loco-icons"></i>
+                        </button>
+                        <p class="number-note" *ngIf="cartcount === null || cartcount === '' ">0</p>
+                        <p class="number-note" *ngIf="cartcount != '' ">{{cartcount}}</p>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </nav>
+
+
+    </div>
+</div>
+
+<!-- is not logged in -->
+<div class="fruits-content" *ngIf="!isLogin">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand logo-data" *ngIf="!isLogin" [routerLink]="['/landing']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <a class="navbar-brand logo-data" *ngIf="isLogin" [routerLink]="['/home']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+              </button> -->
+            <div class="sidenav-btn">
+
+                <button class="btn btn_menu d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+        </button>
+            </div>
+
+
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <div class="navbar-expand-lg">
+                <ul class="navbar-nav top-header">
+                    <li class="nav-item">
+                        <form class="form-inline search-form">
+                            <input class="form-control search-data" #textbox type="text" [(ngModel)]="textValue"
+                            required placeholder="Search for Products..." aria-label="Search" [ngModelOptions]="{standalone: true}">
+                            <button class="btn btn-outline-success search-button" type="submit" (click)="logText(textbox.value)"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                    <li class="nav-item  active">
+
+                        <div class="media loacation-content loacation-content1">
+                            <!-- <img class="mr-3" src="..." alt="Generic placeholder image"> -->
+                            <div class="loaction">
+                                <i class="fas fa-map-marker-alt loco-icons"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="title-loca mt-0">Jayabhery Enclave</h5>
+                                <p class="subtitle-content">Gachibowli,hyderabad,500034</p>
+                            </div>
+                            <i class="far fa-user faloginuser"></i>
+                            <div class="login-contentextra">
+                                <!-- <i class="far fa-user"></i> -->
+                                <a class="loaction loaction1" name="login" (click)="clicked($event)" data-toggle="modal" data-target="#myModal2">
+                                    Login
+                                     </a>
+
+                            </div>
+                            <span class="asd">|</span>
+                            <div class="login-contentextra">
+                                <a class="loaction loaction1" name="signup" (click)="clicked($event)" data-toggle="modal" data-target="#myModal2">
+                                                    SignUp
+                                       </a>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <!-- <li class="nav-item login-contentextra">
+                        <a class="loaction loaction1" data-toggle="modal" data-target="#myModal2">
+              Login
+            </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="loaction loaction1" data-toggle="modal" data-target="#myModal2">
+              SignUp
+            </a>
+                    </li> -->
+
+                </ul>
+
+
+            </div>
+        </nav>
+
+
+    </div>
+</div>
+<div class="second-nav">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+
+
+                <ul class="navbar-nav second-data ">
+                    <li class="nav-item active" *ngIf="!isLogin">
+                        <a class="nav-link second-options" [routerLink]="['/landing']" routerLinkActive="router-link-active">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active" *ngIf="isLogin">
+                        <a class="nav-link second-options" [routerLink]="['/home']" routerLinkActive="router-link-active">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link second-options" [routerLink]="['/aboutus']" routerLinkActive="router-link-active">About Us</a>
+                    </li>
+                    <li class="nav-item  dropdown">
+                        <a class="nav-link second-options dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Products
+            </a>
+                        <div id="navbarDropdownList">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li *ngFor="let item of categorieslist; let i=index">
+                                    <a class="dropdown-item" style="cursor: pointer;" (click)="goToProductDetails(item)" *ngIf="item?.ns_category_name !== 'main menu categories'">{{item?.ns_category_name | titlecase }}</a>
+                                    <a class="dropdown-item" style="cursor: pointer;" (click)="goToProductDetails(item)" *ngIf="item?.ns_category_name === 'main menu categories'">All</a>
+
+                                </li>
+                            </ul>
+                            <!-- <a class="dropdown-item" >{{item?.ns_category_id}}</a> -->
+
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link second-options" [routerLink]="['/blog']" routerLinkActive="router-link-active">Blog <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link second-options" [routerLink]="['/news']" routerLinkActive="router-link-active">News <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <!-- <li class="nav-item active">
+                    <a class="nav-link second-options" >contact Us</a>
+                </li> -->
+
+                    <li class="nav-item offers-all">
+                        <a class="nav-link offers-content" id="navbarDropdown" role="button" [routerLink]="['/offers']">
+                            <!-- <i class="fas fa-sign-out-alt"></i> -->
+                            <img class="price-tag" src="../../../assets/images/price-tag.png" alt=""> Offers
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+
+<!-- login and signup modal -->
+<div class="modal fade" id="myModal2" style="z-index: 9999;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog modal-dialog-custom" role="document">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header btn-sec">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link  btn-s" [ngClass]="{active:login_option}" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  nav-link btn-s" [ngClass]="{active:signup_option}" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Sign Up</a>
+                    </li>
+                </ul>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body p-0">
+                <!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                            role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                            role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                    </li>
+                </ul> -->
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" [ngClass]="{active:login_option, show:login_show}" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <!-- sign in -->
+                        <div class="signin-main-sec">
+                            <div class="sign-in-sec">
+                                <h1 class="welcome-back">
+                                    Welcome Back
+                                </h1>
+                                <p class="sign-in-to">
+                                    Sign in to Continue
+                                </p>
+                            </div>
+                            <div class="sign-in-inp">
+                                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label inp-title">Phone Number</label>
+                                        <input type="number" class="form-control inp-txt" placeholder="Enter Phone Nmber" formControlName="mobile_number_login" [(ngModel)]="loginObj.mobile_number_login" required />
+                                        <div class="help-block2" *ngIf="loginForm.get('mobile_number_login').invalid && (loginForm.get('mobile_number_login').touched || loginForm.get('mobile_number_login').dirty)">
+                                            <div class="text-danger" *ngIf="loginForm.get('mobile_number_login').errors.required">
+                                                phone number is required*
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label inp-title">Password</label>
+                                        <input type="password" class="form-control inp-txt" id="exampleInputPassword1" placeholder="Enter Password">
+                                    </div> -->
+                                    <button class="btn submit-btn" [disabled]="!loginForm.valid">Sign
+                                        In</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sign-in-bottom-sec">
+                            <ul class="sign-in-bottom">
+                                <li class="signin-btm-l">
+                                    <a href="" class="signin-btm-btn">Close</a>
+                                </li>
+                                <li class="signin-btm-2">
+                                    <a href="" class="signin-btm-btn">Help</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" [ngClass]="{active:signup_option, show:signup_show}" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <!-- signup -->
+                        <div class="signin-main-sec">
+                            <div class="sign-in-sec">
+                                <h1 class="welcome-back">
+                                    Let's get started
+                                </h1>
+                                <p class="sign-in-to">
+                                    Create account to see our top picks for you!
+                                </p>
+                            </div>
+                            <div class="sign-in-inp">
+                                <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                                    <!-- <div class="mb-2">
+                                        <label for="exampleInputEmail1" class="form-label inp-title">Name</label>
+                                        <input type="text" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+                                    </div> -->
+                                    <div class="mb-2">
+                                        <label for="exampleInputEmail1" class="form-label inp-title">Phone
+                                            Number</label>
+                                        <input type="number" class="form-control inp-txt" placeholder="Enter Phone Nmber" formControlName="mobile_number_login" [(ngModel)]="signupObj.mobile_number_login" required />
+                                        <div class="help-block2" *ngIf="signupForm.get('mobile_number_login').invalid && (signupForm.get('mobile_number_login').touched || signupForm.get('mobile_number_login').dirty)">
+                                            <div class="text-danger" *ngIf="signupForm.get('mobile_number_login').errors.required">
+                                                phone number is required*
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="mb-2">
+                                        <label for="exampleInputEmail1" class="form-label inp-title">Email</label>
+                                        <input type="email" class="form-control inp-txt" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="exampleInputPassword1" class="form-label inp-title">Password</label>
+                                        <input type="password" class="form-control inp-txt" id="exampleInputPassword1" placeholder="Enter Password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label inp-title">Confirmation Password</label>
+                                        <input type="password" class="form-control inp-txt" id="exampleInputPassword1" placeholder="Enter Confirmation Password">
+                                    </div> -->
+                                    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!signupForm.valid">Create Account</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sign-in-bottom-sec">
+                            <ul class="sign-in-bottom">
+                                <li class="signin-btm-l">
+                                    <a href="" class="signin-btm-btn">Close</a>
+                                </li>
+                                <li class="signin-btm-2">
+                                    <a href="" class="signin-btm-btn">Help</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Signup OTP Modal -->
+<div class="modal fade" style="z-index: 9999;" id="otppage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="otp-data">
+                    <h3 class="otp-title">
+                        Verify Your Number
+                    </h3>
+                    <p class="subtitle-otp">Enter the 6-digit code we sent to you</p>
+                    <p class="phone-number">{{mobile | slice:0:2}}******{{mobile | slice:8:10}}</p>
+                    <form class="text-center" [formGroup]="signupOtpForm" (ngSubmit)="verifySignupOtp()">
+                        <div class="form-group">
+                            <!-- <label for="password" class="text-white">Enter 4 Digit Password</label> -->
+                            <div class="passcode-wrapper">
+                                <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config" name="otp" formControlName="otp" [(ngModel)]="verifySignupObj.otp"></ng-otp-input>
+                                <!-- <input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                                <input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                                <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                                <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+                                <input id="codeBox5" type="number" maxlength="1" onkeyup="onKeyUpEvent(5, event)" onfocus="onFocusEvent(5)">
+                                <input id="codeBox6" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)"> -->
+                            </div>
+                        </div>
+                        <p class="m-0"><a class="resend-code" style="cursor: pointer;" (click)="resend()">Resend OTP</a></p>
+                        <!-- <p class="m-0"><a class="call-me" >Call me Instead</a></p> -->
+                        <button type="submit" class="btn c-button">Continue</button>
+                    </form>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Login OTP Modal -->
+<div class="modal fade" style="z-index: 9999;" id="loginotppage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body new-otpres">
+                <div class="otp-data">
+                    <h3 class="otp-title">
+                        Verify Your Number
+                    </h3>
+                    <p class="subtitle-otp">Enter the 6-digit code we sent to you</p>
+                    <p class="phone-number">{{mobile | slice:0:2}}******{{mobile | slice:8:10}}</p>
+                    <form class="text-center" [formGroup]="loginOtpForm" (ngSubmit)="verifyLoginOtp()">
+                        <div class="form-group">
+                            <!-- <label for="password" class="text-white">Enter 4 Digit Password</label> -->
+                            <div class="passcode-wrapper">
+                                <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config" name="otp_login" formControlName="otp_login" [(ngModel)]="verifyLoginObj.otp_login"></ng-otp-input>
+                                <!-- <span *ngIf="otp" class="o-t-p">Entered otp :-{{otp}}</span> -->
+
+                                <!-- <div class="help-block2" *ngIf="loginOtpForm.get('otp_login').invalid && (loginOtpForm.get('otp_login').touched || loginOtpForm.get('otp_login').dirty)">
+                                    <div class="text-danger" *ngIf="loginOtpForm.get('otp_login').errors.required">
+                                        otp is required*
+                                    </div>
+                                </div> -->
+                                <!-- <input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                                <input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                                <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                                <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+                                <input id="codeBox5" type="number" maxlength="1" onkeyup="onKeyUpEvent(5, event)" onfocus="onFocusEvent(5)">
+                                <input id="codeBox6" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)"> -->
+
+                            </div>
+                        </div>
+                        <p class="m-0"><a class="resend-code" (click)="resend()">Resend OTP</a></p>
+                        <!-- <p class="m-0"><a class="call-me">Call me Instead</a></p> -->
+                        <button type="submit" class="btn c-button">Continue</button>
+                    </form>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

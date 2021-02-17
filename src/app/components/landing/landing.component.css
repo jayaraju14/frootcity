@@ -1,0 +1,40 @@
+/* 
+@media screen and (min-width: 800px) {
+    .seller-card{
+    margin: 10px 40px 10px 40px;
+}
+.image-sell
+{
+    width: 69%;
+}
+} */
+
+@media screen and (max-width: 800px) {
+    .seller-card {
+        margin: 10px 40px 10px 40px;
+    }
+    .image-sell {
+        width: 65%;
+    }
+}
+/* slider */
+.avatar {
+    margin: auto;
+    border-radius: 50%;
+    max-width: 96px;
+}
+
+#customers-testimonials .box {
+    opacity: .2;
+    transform: scale3d(0.8, 0.8, 1);
+    -webkit-transform: scale3d(0.8, 0.8, 1);
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+}
+
+#customers-testimonials .owl-item.active.center .box {
+    opacity: 1;
+    transform: scale3d(1.0, 1.0, 1);
+    -webkit-transform: scale3d(1.0, 1.0, 1);
+}

@@ -1,0 +1,681 @@
+<div class="fruits-content" *ngIf="isLogin">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg ">
+            <a class="navbar-brand logo-data" *ngIf="!isLogin" [routerLink]="['/landing']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <a class="navbar-brand logo-data" *ngIf="isLogin" [routerLink]="['/home']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button> -->
+
+
+            <div class="sidenav-btn">
+
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+        </button>
+            </div>
+
+
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                <div>
+                    <ul class="navbar-nav top-header top_jayabhery">
+                    <li class="nav-item active">
+
+                        <div class="media loacation-content Jayabhery_media">
+                            <div class="loaction ">
+                                <i class="fas fa-map-marker-alt loco-icons"></i>
+                            </div>
+                            <div class="media-body ">
+                                <h5 class="title-loca mt-0">Jayabhery Enclave</h5>
+                                <p class="subtitle-content">Gachibowli,hyderabad,500034</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-auto">
+                        <form class="form-inline">
+                            <input class="form-control search-data" #textbox type="text" [(ngModel)]="textValue"
+                            required placeholder="Search for Products..." aria-label="Search" [ngModelOptions]="{standalone: true}">
+                            <button class="btn btn-outline-success search-button" type="submit" (click)="logText(textbox.value)"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a *ngIf="profilepic == ''" class="nav-link new-profiledata  dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img  src="../../../assets/images/Group 31234.png" width="25px" class="rounded-circle img-data mr-1" alt="">{{firstname}} {{lastname}}
+                            <!-- <img *ngIf="profilepic != null" src="{{profilepic}}" width="25px" class="rounded-circle img-data mr-1" alt="">{{firstname}} {{lastname}} -->
+                        </a>
+                        <a *ngIf="profilepic != ''" class="nav-link new-profiledata  dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{profilepic}}" width="25px" class="rounded-circle img-data mr-1" alt="">{{firstname}} {{lastname}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                            <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Account</a>
+                            <a class="dropdown-item" [routerLink]="['/my-orders']" routerLinkActive="router-link-active">My Orders</a>
+                            <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Wishlist</a>
+                            <a class="dropdown-item" [routerLink]="['/landing']" (click)="logout()">Logout</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-2 mr-2">
+
+                        <!-- <a class="loaction">
+                            <i class="fas fa-bell loco-icons"></i>
+                        </a> -->
+                    </li>
+                    <li class="nav-item ml-2 mr-2">
+                        <button class="loaction" [routerLink]="['/cart']" routerLinkActive="router-link-active">
+                            <i class="fas fa-shopping-cart loco-icons"></i>
+                        </button>
+                        <p class="number-note" *ngIf="cartcount == null || cartcount == '' ">0</p>
+                        <p class="number-note" *ngIf="cartcount != null ">{{cartcount}}</p>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </nav>
+
+
+    </div>
+</div>
+
+<!-- is not logged in -->
+<div class="fruits-content" *ngIf="!isLogin">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand logo-data" *ngIf="!isLogin" [routerLink]="['/landing']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <a class="navbar-brand logo-data" *ngIf="isLogin" [routerLink]="['/home']"><img class="logo-img" src="../../../../assets/images/1.png" alt=""></a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+              </button> -->
+            <div class="sidenav-btn">
+
+                <button class="btn btn_menu d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+        </button>
+            </div>
+
+
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <div class="navbar-expand-lg">
+                <ul class="navbar-nav top-header">
+                    <li class="nav-item">
+                        <form class="form-inline search-form">
+                            <input class="form-control search-data" #textbox type="text" [(ngModel)]="textValue"
+                            required placeholder="Search for Products..." aria-label="Search" [ngModelOptions]="{standalone: true}">
+                            <button class="btn btn-outline-success search-button" type="submit" (click)="logText(textbox.value)"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                    <li class="nav-item  active">
+
+                        <div class="media loacation-content loacation-content1">
+                            <!-- <img class="mr-3" src="..." alt="Generic placeholder image"> -->
+                            <div class="loaction">
+                                <i class="fas fa-map-marker-alt loco-icons"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="title-loca mt-0">Jayabhery Enclave</h5>
+                                <p class="subtitle-content">Gachibowli,hyderabad,500034</p>
+                            </div>
+                            <i class="far fa-user faloginuser"></i>
+                            <div class="login-contentextra">
+                                <!-- <i class="far fa-user"></i> -->
+                                <a class="loaction loaction1" name="login" data-toggle="modal" data-target="#myModal2">
+                                    Login
+                                     </a>
+
+                            </div>
+                            <span class="asd">|</span>
+                            <div class="login-contentextra">
+                                <a class="loaction loaction1" name="signup" data-toggle="modal" data-target="#myModal2">
+                                                    SignUp
+                                       </a>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <!-- <li class="nav-item login-contentextra">
+                        <a class="loaction loaction1" data-toggle="modal" data-target="#myModal2">
+              Login
+            </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="loaction loaction1" data-toggle="modal" data-target="#myModal2">
+              SignUp
+            </a>
+                    </li> -->
+
+                </ul>
+
+
+            </div>
+        </nav>
+
+
+    </div>
+</div>
+<div class="second-nav">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+
+
+                <ul class="navbar-nav second-data ">
+                    <li class="nav-item active" *ngIf="!isLogin">
+                        <a class="nav-link second-options" [routerLink]="['/landing']" routerLinkActive="router-link-active">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active" *ngIf="isLogin">
+                        <a class="nav-link second-options" [routerLink]="['/home']" routerLinkActive="router-link-active">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link second-options" [routerLink]="['/aboutus']" routerLinkActive="router-link-active">About Us</a>
+                    </li>
+                    <li class="nav-item  dropdown">
+                        <a class="nav-link second-options dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Products
+            </a>
+                        <div id="navbarDropdownList">
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li *ngFor="let item of categorieslist; let i=index">
+                                    <a class="dropdown-item" style="cursor: pointer;" (click)="goToProductDetails(item)" *ngIf="item?.ns_category_name !== 'main menu categories'">{{item?.ns_category_name | titlecase }}</a>
+                                    <a class="dropdown-item" style="cursor: pointer;" (click)="goToProductDetails(item)" *ngIf="item?.ns_category_name === 'main menu categories'">All</a>
+
+                                </li>
+                            </ul>
+                            <!-- <a class="dropdown-item" >{{item?.ns_category_id}}</a> -->
+
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link second-options" [routerLink]="['/blog']" routerLinkActive="router-link-active">Blog <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link second-options" [routerLink]="['/news']" routerLinkActive="router-link-active">News <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <!-- <li class="nav-item active">
+                    <a class="nav-link second-options" >contact Us</a>
+                </li> -->
+
+                    <li class="nav-item offers-all">
+                        <a class="nav-link offers-content" id="navbarDropdown" role="button" [routerLink]="['/offers']">
+                            <!-- <i class="fas fa-sign-out-alt"></i> -->
+                            <img class="price-tag" src="../../../assets/images/price-tag.png" alt=""> Offers
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+
+<div class="cart-content">
+    <div class="container">
+        <!-- <h3 class="pathlist">Home<span>/ Cart </span></h3> -->
+        <div class="row">
+            <div class="col-md-8">
+                <div id="accordion">
+                    <div class="card new-cartdata">
+                        <div class="card-header header-main" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h5 class="mb-0">
+                                <ul class="acord-title">
+                                    <li><span class="list-number">1</span>
+                                    </li>
+                                    <li *ngIf="!products">
+                                        <button class="btn btn-link cart-title">
+                                        Cart(0 items)
+                              </button></li>
+                                    <li *ngIf="products">
+                                        <button class="btn btn-link cart-title">
+                                        Cart({{products.length}} items)
+                              </button></li>
+                                </ul>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body p-0">
+                                <div class="media cart-items" *ngFor="let item of products; let i = index">
+                                    <div class="new-images"> <img class="align-self-center image-apple mr-3" src="{{item?.image}}" alt="Generic placeholder image">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="card-itemname mt-0">{{item?.product_title}}</h5>
+                                        <!-- <p class="weight-item">1.20/kg</p> -->
+                                        <ul class="extra-items">
+                                            <li>
+                                                <p class="price-item mt-2">INR {{item?.product_price}}/-</p>
+                                                <!-- <p class="price-item">Sub Total {{(item?.quantity*item?.product_price)|number}}/-</p> -->
+
+                                            </li>
+                                            <!-- <li>
+                                            </li> -->
+                                            <li class="ml-auto">
+                                                <div>
+                                                    <button class="qtySelector text-center mr-2" (click)="decrement(item)"><i class="fa fa-minus decreaseQty"></i></button>
+                                                    <span class="mt-2">{{item?.quantity}}</span>
+                                                    <button class="qtySelector text-center ml-2" (click)="increment(item)"><i class="fa fa-plus increaseQty"></i></button>
+                                                </div>
+                                            </li>
+                                            <li class="ml-2">
+                                                <div>
+                                                    <button class="qtySelector text-center mr-2" (click)="deleteItem(item)"><i class="far fa-trash-alt"></i></button>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- <div class="media cart-items">
+                                    <div class="new-images"> <img class="align-self-center image-apple mr-3" src="../../../assets/images/greap-cart2.png" alt="Generic placeholder image">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="card-itemname mt-0">Apple</h5>
+                                        <p class="weight-item">1.20/kg</p>
+                                        <ul class="extra-items">
+                                            <li>
+                                                <p class="price-item mt-2">INR 250/-</p>
+                                            </li>
+                                            <li class="ml-auto">
+                                                <div class="qtySelector text-center">
+                                                    <i class="fa fa-minus decreaseQty"></i>
+                                                    <input type="text" class="qtyValue" value="1" />
+                                                    <i class="fa fa-plus increaseQty"></i>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="media cart-items">
+                                    <div class="new-images"> <img class="align-self-center image-apple mr-3" src="../../../assets/images/apple-cart.png" alt="Generic placeholder image">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="card-itemname mt-0">Apple</h5>
+                                        <p class="weight-item">1.20/kg</p>
+                                        <ul class="extra-items">
+                                            <li>
+                                                <p class="price-item mt-2">INR 250/-</p>
+                                            </li>
+                                            <li class="ml-auto">
+                                                <div class="qtySelector text-center">
+                                                    <i class="fa fa-minus decreaseQty"></i>
+                                                    <input type="text" class="qtyValue" value="1" />
+                                                    <i class="fa fa-plus increaseQty"></i>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card new-cartdata">
+                        <div class="card-header header-main" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h5 class="mb-0">
+
+
+                                <ul class="acord-title">
+                                    <li><span class="list-number">2</span></li>
+                                    <li><button class="btn btn-link cart-title collapsed">
+                                        Delivery Address
+                                      </button></li>
+                                    <li class="ml-auto"><a  class="new-address" data-toggle="modal" data-target="#addaddress"><i class="fas fa-plus-circle mr-2"></i>Add New Delivery Address</a></li>
+                                </ul>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6" *ngFor="let item of address; let i=index">
+                                        <div class="address-card" (click)="onSelect(item)" *ngIf= "item?.address != null">
+                                            <div class="address-content">
+                                                <ul class="address-default">
+                                                    <li class="home" style="font-size: 14px;">Home</li>
+                                                    <!-- <li class="default-btn ml-auto">Default</li> -->
+                                                </ul>
+
+                                                <p class="total-address" style="color: #000; font-size: 17px;">
+                                                    {{item?.address}} <br/> {{item?.Landmark}} <br/> {{item?.state}}<br/> {{item?.pin_code}}
+                                                </p>
+
+                                                <a class="edit-btn" style="color: blue; font-size: 14px;" data-toggle="modal" data-target="#editaddress" (click)="editAddress(item)">Edit</a>
+                                                <!-- <div class="delivery-content"> -->
+                                                <!-- </div> -->
+
+                                                <!-- <div class="delivery-content"> -->
+                                                <!-- </div> -->
+
+                                            </div>
+                                            <h3 class="data-content" *ngIf="!clickedUser">Delivery Here</h3>
+                                            <h3 class="data-content" style="background-color: red; color: #fff;" *ngIf="clickedUser">Delivery Here</h3>
+                                        </div>
+                                        <div class="no-data" style="margin: 0 auto;" *ngIf="item?.address == null">No Data</div>
+
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <div class="address-card">
+                                            <div class="address-content">
+                                                <ul class="address-default">
+                                                    <li class="home">Work</li>
+                                                    <li class="default-btn default-btn1 ml-auto">Select</li>
+                                                </ul>
+
+                                                <p class="total-address">
+                                                    1001 veterans blvd <br/> redwood city,CA 94508.
+                                                </p>
+                                                <a class="edit-btn" href="">Edit</a>
+                                                
+
+                                            </div>
+                                            <h3 class="data-content">Delivery Here</h3>
+
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <!-- <div class="row" *ngIf="address == null">
+                                    <p class="total-address" style="margin: 0 auto;">
+                                        Not Available
+                                    </p>
+                                </div> -->
+                                <button class="continue-btn" data-toggle="collapse" data-target="#collapseThree" (click)="orderConfirmation()">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card new-cartdata">
+                        <div class="card-header header-main" id="headingThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h5 class="mb-0">
+                                <ul class="acord-title">
+                                    <li><span class="list-number">3</span></li>
+                                    <li><button class="btn btn-link cart-title collapsed">
+                                        Payment
+                                      </button></li>
+                                </ul>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+
+
+                                <div class="address-content" *ngIf="clickedUser != null">
+                                    <ul class="address-title">
+                                        <li class="address-left">Address</li>
+                                        <!-- <li class="ml-auto"><a class="change-button" ><i class="fas fa-location-arrow mr-1"></i> Change</a></li> -->
+                                    </ul>
+                                    <ul class="inside-address">
+                                        <li class="home" style="font-size: 14px;">Home</li>
+                                        <!-- <li class="default-address ml-auto">Default</li> -->
+                                    </ul>
+                                    <p class="total-address" style="color: #000; font-size: 15px;">
+                                        {{clickedUser?.address}} <br/> {{clickedUser?.Landmark}} <br/> {{clickedUser?.state}}<br/> {{clickedUser?.pin_code}}
+                                    </p>
+                                    <ul class="address-title">
+                                        <li class="address-left">Payment Method</li>
+                                        <!-- <li class="ml-auto"><a class="change-button" ><i class="fas fa-location-arrow mr-1"></i> Change</a></li> -->
+                                    </ul>
+                                    <!-- <a class="edit-payment" data-toggle="modal" data-target="#payment-data" ><i class="fas fa-credit-card mr-1"></i> Edit Payment Method</a> -->
+                                    <button class="btn btn-primary" style="background-color: red; border: none; margin: 8px;" (click)="initPay()">Pay now</button>
+
+                                    <!-- <ul class="address-title">
+                                        <li class="address-left">Promo Code</li>
+                                        <li class="ml-auto"><a class="change-button" ><i class="fas fa-location-arrow mr-1"></i> Change</a></li>
+                                    </ul>
+                                    <a class="edit-payment" ><i class="fas fa-credit-card mr-1"></i> Add Promo Code</a> -->
+
+                                </div>
+                                <div class="address-content" *ngIf="clickedUser == null">
+                                    Please select Delivery Address To Make Payment
+                                </div>  
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4" *ngIf="total != null">
+                <div class="media right-payment">
+                    <!-- <div class="fresh-image mr-3"> <img class="align-self-center image-content " src="../../../assets/images/app-store.PNG" alt="Generic placeholder image">
+                    </div> -->
+                    <!-- <div class="media-body">
+                        <h5 class="titlefresh mt-0">Center-aligned media</h5>
+
+                        <p class="subfresh mb-0">Donec sed odio dui.</p>
+                    </div> -->
+                </div>
+                <ul class="payment-total">
+                    <li class="bill-title pb-1">Bill Details</li>
+                    <li class="items-total d-flex justify-content-between align-items-center pb-1">items Total ({{cartcount}} items) <span>INR {{total}}</span></li>
+                    <!-- <li class="items-total d-flex justify-content-between align-items-center pb-1">Store Charges <span>$62.8</span></li>
+                    <li class="items-total d-flex justify-content-between align-items-center pb-2">Delivery Fee <span>$10</span></li>
+                    <li class="items-total items-total1 d-flex justify-content-between align-items-center pb-2">Total Discount <span>$1884</span></li> -->
+                </ul>
+                <ul class="payment-total1">
+                    <li class="items-total2 d-flex justify-content-between align-items-center pb-2">Total <span class="new-code">INR {{total}}</span></li>
+                </ul>
+                <!-- <p class="total-save text-center">Your Total savings on this order $8.52</p> -->
+
+            </div>
+            <div class="col-md-4" *ngIf="total == null || total == ''"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Add Address  Modal -->
+<div class="modal fade" style="z-index: 9999;" id="addaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content edit-data">
+
+            <div class="modal-body">
+                <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail9" class="form-label inp-title">Address</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail9" aria-describedby="emailHelp" placeholder="Address" formControlName="address" [(ngModel)]="addressObj.address" required />
+                        <div class="help-block2" *ngIf="addressForm.get('address').invalid && (addressForm.get('address').touched || addressForm.get('address').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('address').errors.required">
+                                address is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail2" class="form-label inp-title">Landmark</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Landmark" formControlName="landmark" [(ngModel)]="addressObj.landmark" required />
+                        <div class="help-block2" *ngIf="addressForm.get('landmark').invalid && (addressForm.get('landmark').touched || addressForm.get('landmark').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('landmark').errors.required">
+                                landmark is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail3" class="form-label inp-title">State</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="State" formControlName="state" [(ngModel)]="addressObj.state" required />
+                        <div class="help-block2" *ngIf="addressForm.get('state').invalid && (addressForm.get('state').touched || addressForm.get('state').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('state').errors.required">
+                                state is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail4" class="form-label inp-title">Pincode</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail4" aria-describedby="emailHelp" placeholder="Pincode" formControlName="pin_code" [(ngModel)]="addressObj.pin_code" required />
+                        <div class="help-block2" *ngIf="addressForm.get('pin_code').invalid && (addressForm.get('pin_code').touched || addressForm.get('pin_code').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('pin_code').errors.required">
+                                pin_code is required*
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!addressForm.valid">Submit</button>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Edit Address  Modal -->
+<div class="modal fade" style="z-index: 9999;" id="editaddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content edit-data">
+
+            <div class="modal-body">
+                <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail5" class="form-label inp-title">Address</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail5" aria-describedby="emailHelp" placeholder="Address" formControlName="address" [(ngModel)]="addressObj.address" required />
+                        <div class="help-block2" *ngIf="addressForm.get('address').invalid && (addressForm.get('address').touched || addressForm.get('address').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('address').errors.required">
+                                address is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail6" class="form-label inp-title">Landmark</label>
+                        <input type="email" class="form-control inp-txt" id="exampleInputEmail6" aria-describedby="emailHelp" placeholder="Landmark" formControlName="landmark" [(ngModel)]="addressObj.landmark" required />
+                        <div class="help-block2" *ngIf="addressForm.get('landmark').invalid && (addressForm.get('landmark').touched || addressForm.get('landmark').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('landmark').errors.required">
+                                landmark is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail7" class="form-label inp-title">State</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail7" aria-describedby="emailHelp" placeholder="State" formControlName="state" [(ngModel)]="addressObj.state" required />
+                        <div class="help-block2" *ngIf="addressForm.get('state').invalid && (addressForm.get('state').touched || addressForm.get('state').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('state').errors.required">
+                                state is required*
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail8" class="form-label inp-title">Pincode</label>
+                        <input type="text" class="form-control inp-txt" id="exampleInputEmail8" aria-describedby="emailHelp" placeholder="Pincode" formControlName="pin_code" [(ngModel)]="addressObj.pin_code" required />
+                        <div class="help-block2" *ngIf="addressForm.get('pin_code').invalid && (addressForm.get('pin_code').touched || addressForm.get('pin_code').dirty)">
+                            <div class="text-danger" *ngIf="addressForm.get('pin_code').errors.required">
+                                pin_code is required*
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!addressForm.valid">Submit</button>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal payment -->
+<div class="modal fade" id="payment-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content add-address">
+
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title address-title" id="exampleModalLabel">Edit Payment Method</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <ul class="nav nav-pills payment-methods justify-content-between mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link payment-options active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Credit/ Debit Card</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link payment-options" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Net Banking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link payment-options" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Cash On Delivery</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="card-payment">
+                            <h3 class="title-cards">
+                                Add New Card
+                            </h3>
+                            <p class="subtitle-card">WE ACCEPT <span>(Master/Visa/Rupay)</span></p>
+                            <form class="new-fromdata">
+                                <div class="form-group">
+                                    <label class="user-content">Card Number</label>
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control delivery-inp" placeholder="Delivery Area">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="validationTooltipUsernamePrepend"><i
+                                class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <label class="user-content">Valid Throug(MM/YY)</label>
+                                        <input type="text" class="form-control delivery-inp" id="inputCity" placeholder="Enter Valid Throug(MM/YY)">
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label class="user-content">cvv</label>
+                                        <input type="text" class="form-control delivery-inp" id="inputZip" placeholder="Enter CVV Number">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label class="user-content">Name on Card</label>
+                                    <input type="password" class="form-control delivery-inp" placeholder="Delivery Instructions">
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label user-content" for="exampleCheck1">Save this card for a faster checkout next time</label>
+                                </div>
+
+
+                                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+
+                                <div class="row ">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary save-button">Save changes</button>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
