@@ -38,6 +38,8 @@ import { ContactusComponent } from './components/contactus/contactus.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { StarRatingModule } from 'angular-star-rating';
+import { RatingModule } from 'ng-starrating';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 
@@ -84,6 +86,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     // NgxStripeModule,
     NgOtpInputModule,
     BrowserAnimationsModule,
+    RatingModule,
+    StarRatingModule.forRoot(),
     ToastrModule.forRoot(),
   ],
   providers: [],

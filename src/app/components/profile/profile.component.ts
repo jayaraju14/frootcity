@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
   }
 
   upload(files: FileList) {
-    debugger
+    // debugger
     this.profileObj.profilepic = files.item(0);
     return false;
   }

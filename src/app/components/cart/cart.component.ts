@@ -47,6 +47,8 @@ export class CartComponent implements OnInit {
   log: '';
   isLogin: string;
   profilepic: any;
+  order_array_input = []
+  list: any;
 
 
 
@@ -108,21 +110,22 @@ export class CartComponent implements OnInit {
     // debugger
     this.confirmObj.user_id = localStorage.getItem('userId');
     this.confirmObj.total_price_input = this.total;
+    this.confirmObj.order_array_input = [];
     this.products.forEach((item, index) => {
-    // debugger
+      let obj:any = {}
       this.groupList.push(item.product_id, item.quantity);
-    this.confirmObj.product_id =item.product_id;
-    this.confirmObj.product_qty=item.quantity;
+    obj.product_id =item.product_id;
+    obj.product_qty=item.quantity;
+    this.confirmObj.order_array_input.push(obj)
     });
-    // console.log(this.groupList);
     
-    var obj =   { "total_price_input": this.confirmObj.total_price_input, "user_id": this.confirmObj.user_id, "order_array_input": [{ "product_id":this.confirmObj.product_id, "product_qty":this.confirmObj.product_qty }] } 
+    // var obj =   { "total_price_input": this.confirmObj.total_price_input, "user_id": this.confirmObj.user_id, "order_array_input": [{ "product_id":this.confirmObj.product_id, "product_qty":this.confirmObj.product_qty }] } 
                     
     const headers = new HttpHeaders({ 
       "x-api-key":"12345" ,
     })
     const profile = "order_confirmation";
-    this.http.post(this.baseUrl + profile, obj, {headers}).subscribe((data:any) => {
+    this.http.post(this.baseUrl + profile, this.confirmObj, {headers}).subscribe((data:any) => {
       // debugger
       if (data.data === null){
         this.toastr.errorToastr(data.data.error, 'Oops!', {position: 'bottom-center', toastTimeout:1000});
@@ -321,18 +324,9 @@ initPay() {
         // location.reload()
       } else {
         this.toastr.successToastr(data.message, 'Success!', {position: 'bottom-center', toastTimeout:1000});
-        console.log(this.addObj.quantity-1)
-        if(this.addObj.quantity-1==0)
-        {
-          this.deleteItem(item)
-        }
-        else{
-          this.addObj = new addcart;
-          // location.reload();
-          this.getCartDetails();
-        }
-        
-       
+        this.addObj = new addcart;
+        // location.reload();
+        this.getCartDetails();
       }
   },
   err => {

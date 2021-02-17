@@ -7,8 +7,8 @@
             <!-- <li class="ml-auto"><a class="see-more" routerLink='/Best-seller' routerLinkActive="router-link-active">See More</a></li> -->
         </ul>
         <div class="row" *ngIf="!isLogin">
-            <div class="col-md-3" *ngFor="let item of bestsellers; let i=index" data-toggle="modal" data-target="#myModal2">
-                <div class="card seller-content">
+            <div class="col-md-3" *ngFor="let item of bestsellers; let i=index">
+                <div class="card seller-content" (click)="getProductsbyId(item)">
                     <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
                     </div>
                     <div class="card-body fruit-info">
@@ -115,8 +115,8 @@
 
         </div>
         <div class="row" *ngIf="isLogin">
-            <div class="col-md-3 seller-card" *ngFor="let item of bestsellers; let i=index" (click)="getProductsbyId(item)">
-                <div class="card seller-content">
+            <div class="col-md-3 seller-card" *ngFor="let item of bestsellers1; let i=index">
+                <div class="card seller-content" (click)="getProductsbyId(item)">
                     <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
                     </div>
                     <div class="card-body fruit-info">
@@ -132,8 +132,14 @@
                         </ul>
                     </div>
                 </div>
-                <a class="cart-data" ><i class="far fa-heart hart-image"></i></a>
-            </div>
+                <div *ngIf="!isLogin">
+                    <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                    </div>
+                    <div *ngIf="isLogin">
+                        <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                        <a class="cart-data"  *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                    </div>
+                </div>
         </div>
     </div>
 </div>

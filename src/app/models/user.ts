@@ -49,6 +49,7 @@ export class signupM {
     total_price_input: any;
     product_id: any;
     product_qty: any;
+    order_array_input: any;
   }
 
   export class paymentC {
@@ -61,4 +62,11 @@ export class signupM {
   export class favourite {
     user_id: any;
     product_id: any;
+    favourite: any;
+  }
+
+  export class rating {
+    user_id: any;
+    product_id: any;
+    rating: any;
   }

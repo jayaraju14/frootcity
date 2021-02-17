@@ -86,12 +86,28 @@ export class DataService {
     return this.http.get(this.baseUrl + "get_best_sellers", {headers:headers});
   }
 
+  getBestSellers1(id: any){
+    const headers = new HttpHeaders({
+      "Content-type" : "application/json", 
+      "x-api-key":"12345" 
+    })
+    return this.http.get(this.baseUrl + "get_best_sellers?user_id=" + id, {headers:headers});
+  }
+
   getProducts(slug: any){
     const headers = new HttpHeaders({
       "Content-type" : "application/json", 
       "x-api-key":"12345" 
     })
     return this.http.get(this.baseUrl + "category_products?slug=" + slug, {headers:headers});
+  }
+
+  getProducts1(slug: any, id: any){
+    const headers = new HttpHeaders({
+      "Content-type" : "application/json", 
+      "x-api-key":"12345" 
+    })
+    return this.http.get(this.baseUrl + "category_products?slug=" + slug + '&' + "user_id=" + id, {headers:headers});
   }
 
   getProductsbyId(slug: any){
@@ -143,12 +159,20 @@ export class DataService {
     return this.http.get(this.baseUrl + "get_recommended_products", {headers:headers});
   }
 
+  getRecommended1(id: any){
+    const headers = new HttpHeaders({
+      "Content-type" : "application/json", 
+      "x-api-key":"12345" 
+    })
+    return this.http.get(this.baseUrl + "get_recommended_products?user_id=" + id, {headers:headers});
+  }
+
   getFavourites(id: any){
     const headers = new HttpHeaders({
       "Content-type" : "application/json", 
       "x-api-key":"12345" 
     })
-    return this.http.get(this.baseUrl + "favourites_details?user_id" + id, {headers:headers});
+    return this.http.get(this.baseUrl + "favourites_details?user_id=" + id, {headers:headers});
   }
 
   getOrders(id: any){

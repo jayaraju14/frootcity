@@ -6,9 +6,9 @@
             <!-- <li class="best-sellertitle" [routerLink]="['/landing']" routerLinkActive="router-link-active">{{name}}</li> -->
             <!-- <li class="ml-auto"><a class="see-more" routerLink='/Best-seller' routerLinkActive="router-link-active">See More</a></li> -->
         </ul>
-        <!-- <div class="row" *ngIf="!isLogin">
-            <div class="col-md-4" *ngFor="let item of vegitables; let i=index" data-toggle="modal" data-target="#myModal2">
-                <div class="card seller-content">
+        <div class="row" *ngIf="!isLogin">
+            <div class="col-md-3" *ngFor="let item of vegitables; let i=index">
+                <div class="card seller-content" (click)="getProductsbyId(item)">
                     <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
                     </div>
                     <div class="card-body fruit-info">
@@ -18,16 +18,18 @@
                             <li>
                                 <p class="price">INR {{item?.product_price}}</p>
                             </li>
-                            <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li>
-                        </ul>
+                            <li class="rate-image ml-auto">
+                                <!-- <img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""> -->
+                                <button class="btn btn-success" id="addcartbtn">Add to cart</button>
+                            </li>                        </ul>
                     </div>
                 </div>
                 <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
             </div>
-        </div> -->
-        <div class="row">
-            <div class="col-md-3 seller-card" *ngFor="let item of filteredData; let i=index" (click)="getProductsbyId(item)">
-                <div class="card seller-content">
+        </div>
+        <div class="row" *ngIf="isLogin">
+            <div class="col-md-3 seller-card" *ngFor="let item of filteredData1; let i=index">
+                <div class="card seller-content"  (click)="getProductsbyId(item)">
                     <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
                     </div>
                     <div class="card-body fruit-info">
@@ -44,8 +46,14 @@
                         </ul>
                     </div>
                 </div>
-                <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
-            </div>
+                <div *ngIf="!isLogin">
+                    <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                    </div>
+                    <div *ngIf="isLogin">
+                        <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                        <a class="cart-data"  *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                    </div>      
+                </div>
             <!-- <div class="col-md-4">
                 <div class="card seller-content">
                     <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 8.png" alt="Card image cap">

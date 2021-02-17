@@ -50,7 +50,7 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                             <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Account</a>
                             <a class="dropdown-item" [routerLink]="['/my-orders']" routerLinkActive="router-link-active">My Orders</a>
-                            <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Wishlist</a>
+                            <a class="dropdown-item" [routerLink]="['/wishlist']" routerLinkActive="router-link-active">My Wishlist</a>
                             <a class="dropdown-item" [routerLink]="['/landing']" (click)="logout()">Logout</a>
                         </div>
                     </li>
@@ -355,7 +355,7 @@
                                                 <!-- </div> -->
 
                                             </div>
-                                            <h3 class="data-content" *ngIf="!clickedUser">Delivery Here</h3>
+                                            <h3 class="data-content" style="cursor: pointer;" *ngIf="!clickedUser">Delivery Here</h3>
                                             <h3 class="data-content" style="background-color: red; color: #fff;" *ngIf="clickedUser">Delivery Here</h3>
                                         </div>
                                         <div class="no-data" style="margin: 0 auto;" *ngIf="item?.address == null">No Data</div>

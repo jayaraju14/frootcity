@@ -40,6 +40,9 @@
     .asd {
         margin-top: 7px;
     }
+    .top_jayabhery {
+        margin-right: 45px !important;
+    }
 }
 
 .asd {
@@ -53,6 +56,21 @@
         margin-bottom: 30px;
     }
     .top_jayabhery {
-        margin-right: 0px !important;
+        margin-right: 30px !important;
     }
+}
+@media only screen and (max-width: 900px) and (min-width: 768px){
+/* @media screen and (min-width: 768px) { */
+    .number-note
+    {
+        right: 217px !important;
+        top:118px !important;
+    }
+}
+@media only screen and (max-width: 1350px) and (min-width: 1024px){
+.search-data
+{
+    width:200px;
+}
+
 }

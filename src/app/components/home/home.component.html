@@ -80,8 +80,8 @@
                 <li class="ml-auto"><a class="see-more" routerLink='/Best-seller' routerLinkActive="router-link-active">See More</a></li>
             </ul>
             <div class="row">
-                <div class="col-md-3 seller-card" *ngFor="let item of bestsellers; let i=index" (click)="getProductsbyId(item)">
-                    <div class="card seller-content">
+                <div class="col-md-3 seller-card" *ngFor="let item of bestsellers1; let i=index">
+                    <div class="card seller-content" (click)="getProductsbyId(item)">
                         <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
                         </div>
                         <div class="card-body fruit-info">
@@ -99,8 +99,14 @@
                             </ul>
                         </div>
                     </div>
-                    <a class="cart-data" href="#"><i class="far fa-heart hart-image"></i></a>
-                </div>
+                    <div *ngIf="!isLogin">
+                        <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                        </div>
+                        <div *ngIf="isLogin">
+                            <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                            <a class="cart-data" *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                        </div>
+                   </div>
                 <!-- <div class="col-md-4">
                     <div class="card seller-content">
                         <div class="fruits-main"> <img class="card-img-top image-sell" src="../../../assets/images/Image 8.png" alt="Card image cap">
@@ -192,9 +198,9 @@
                 <li class="best-sellertitle">Recommend for you</li>
                 <li class="ml-auto"><a class="see-more" routerLink='/recommended-products' routerLinkActive="router-link-active">See More</a></li>
             </ul>
-            <owl-carousel-o [options]="customOptions">
+            <owl-carousel-o [options]="customOptions1">
                 <ng-container>
-                  <ng-template carouselSlide *ngFor="let item of recommended; let i=index">
+                  <ng-template carouselSlide *ngFor="let item of recommended1; let i=index">
       <!-- <div class="card new-lastowl"> -->
           <div class="item new-imgcontet">
             <div class="card seller-content" (click)="getProductsbyId(item)">
@@ -213,8 +219,13 @@
                     </ul>
                 </div>
             </div>
-            <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
-          </div>
+            <div *ngIf="!isLogin">
+                <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                </div>
+                <div *ngIf="isLogin">
+                    <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                    <a class="cart-data" *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                </div>          </div>
         </ng-template>
     </ng-container>
   </owl-carousel-o>

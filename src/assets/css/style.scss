@@ -87,9 +87,9 @@ body {
             width: 100%;
             height: auto;
             // margin-right: -58px;
+            margin-top: 20px;
             margin-bottom: 0px;
             font-size: 12px;
-            margin-top: 20px;
         }
         .number-note {
             width: 15px;
@@ -105,7 +105,7 @@ body {
             align-items: center;
             position: absolute;
             // right: 28px;
-            right: 138px;
+            right: 75px;
             top: 26px;
             @include xsm {
                 position: relative !important;
@@ -2546,6 +2546,7 @@ body {
         border-radius: 6px;
     }
 }
+
 a.nav-link.second-options.router-link-active {
     font-weight: bold;
     // color: black !important;

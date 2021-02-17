@@ -96,9 +96,9 @@ body {
   .fruits-content .top-header {
     width: 100%;
     height: auto;
+    margin-top: 20px;
     margin-bottom: 0px;
     font-size: 12px;
-    margin-top: 20px;
   }
 }
 
@@ -121,7 +121,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   position: absolute;
-  right: 138px;
+  right: 75px;
   top: 26px;
 }
 

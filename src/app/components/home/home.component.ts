@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   favObj: favourite = new favourite();
   id: string;
   favourites: any;
+  bestsellers1: any;
+  recommended1: any;
 
   // slidedata : any = [];
   
@@ -37,12 +39,33 @@ export class HomeComponent implements OnInit {
     this.isLogin = localStorage.getItem('Authorization');
     this.slider();
     this.getBestSellers();
+    this.getBestSellers1();
     this.getRecommended();
+    this.getRecommended1();
     this.quantity = 1;
     // this.loadScripts();
   }
 
-    customOptions: OwlOptions = {
+  customOptions: OwlOptions = {
+    loop: true,
+      margin: 10,
+      nav: false,
+      dots: false,
+      autoplay: true,
+      responsive: {
+          0: {
+              items: 1
+          },
+          600: {
+              items: 1
+          },
+          1000: {
+              items: 1
+          }
+  }
+}
+
+    customOptions1: OwlOptions = {
       loop: true,
         margin: 10,
         nav: false,
@@ -60,6 +83,8 @@ export class HomeComponent implements OnInit {
             }
     }
   }
+
+  
 
 
   loadScripts() {
@@ -83,6 +108,15 @@ export class HomeComponent implements OnInit {
       (data:any)=> {
         // debugger
       this.bestsellers= data.data.bestSellers;
+    });
+
+  }
+  getBestSellers1(){
+    this.id = localStorage.getItem('userId')
+    this.service.getBestSellers1(this.id).subscribe(
+      (data:any)=> {
+        // debugger
+      this.bestsellers1= data.data.bestSellers;
     });
 
   }
@@ -126,6 +160,16 @@ export class HomeComponent implements OnInit {
 
   }
 
+  getRecommended1(){
+    this.id = localStorage.getItem('userId')
+    this.service.getRecommended1(this.id).subscribe(
+      (data:any)=> {
+        // debugger
+      this.recommended1= data.data.recommendedProducts;
+    });
+
+  }
+
   // increment product qty
   incrementQty() {
     console.log(this.quantity+1);
@@ -143,18 +187,33 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  favorite(item: any) {
+    // debugger
+      if(item.is_favourite === "0"){
+        this.favObj.favourite = true;
+      }
+      if(item.is_favourite === "1"){
+        this.favObj.favourite = false;
+      }
+      // this.favObj.favourite = true;
+      this.addToFavourites(item)
+    }
+    // console.log(this.quantity+1);
+
   addToFavourites(item: any){
     // debugger
     this.favObj.product_id = item.product_id
     this.favObj.user_id = localStorage.getItem('userId');
+    // this.favObj.favourite = true;
     let fData = new FormData();
     fData.append("product_id", this.favObj.product_id);          
-    fData.append("user_id", this.favObj.user_id);  
+    fData.append("user_id", this.favObj.user_id);
+    fData.append("favourite", JSON.stringify(this.favObj.favourite));   
                     
     const headers = new HttpHeaders({ 
       "x-api-key":"12345" ,
     })
-    const profile = "addfavourites";
+    const profile = "addtofavourites";
     this.http.post(this.baseUrl + profile, fData, {headers}).subscribe((data:any) => {
       // debugger
       if (data.status === false){
@@ -163,6 +222,8 @@ export class HomeComponent implements OnInit {
       } else {
         this.toastr.successToastr(data.message, 'Success!', {position: 'bottom-center', toastTimeout:1000});
         this.favObj = new favourite;
+        this.getRecommended1();
+        this.getBestSellers1();
         // location.reload();
       }
   },
@@ -178,16 +239,6 @@ export class HomeComponent implements OnInit {
   }
   );
   
-  }
-
-  getFavourites(){
-    this.id = localStorage.getItem('userId');
-    this.service.getFavourites(this.id).subscribe(
-      (data:any)=> {
-        // debugger
-      this.favourites= data.data.recommendedProducts;
-    });
-
   }
 
 }

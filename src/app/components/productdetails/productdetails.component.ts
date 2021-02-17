@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { addcart, loginM, loginOtp, signupM, signupOtp } from 'src/app/models/user';
+import { addcart, favourite, loginM, loginOtp, rating, signupM, signupOtp } from 'src/app/models/user';
 import { DataService } from 'src/app/service/data.service';
 import { environment } from 'src/environments/environment';
+import { RatingModule, StarRatingComponent } from 'ng-starrating';
+
 declare const $: any;
 
 
@@ -57,6 +59,18 @@ export class ProductdetailsComponent implements OnInit {
   textValue = '';
   log: '';
   profilepic: any;
+  rating: any;
+  userRating: any;  
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number = 0;
+  // onClickResult: OnClickEvent;
+  totalstar = 5;
+  rateObj: rating = new rating();
+  favObj: favourite = new favourite();
+  // id: string;
+  favourites: any;
+  recommended1: any;
+
 
 
 
@@ -74,6 +88,7 @@ export class ProductdetailsComponent implements OnInit {
     this.getCategories();
     this.getProductsbyId();
     this.getRecommended();
+    this.getRecommended1()
     this.loadScripts();
     this.quantity = 1;
 
@@ -207,6 +222,58 @@ export class ProductdetailsComponent implements OnInit {
     })
   }
 
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}, item) {
+    // debugger
+    this.selectedValue = $event.oldValue;
+    this.userRating = $event.newValue;
+    this.addRating(item);
+  }
+
+  addRating(item: any){
+    // debugger
+    this.rateObj.product_id = item.product_id
+    this.rateObj.user_id = localStorage.getItem('userId');
+    // this.rating = $("#rating").val();
+    // this.rateObj.rating = this.selectedValue;
+    this.rateObj.rating = this.userRating;
+    let fData = new FormData();
+    fData.append("product_id", this.rateObj.product_id);          
+    fData.append("user_id", this.rateObj.user_id);  
+    fData.append("rating", this.rateObj.rating); 
+                    
+    const headers = new HttpHeaders({ 
+      "x-api-key":"12345" ,
+    })
+    const profile = "addrating";
+    this.http.post(this.baseUrl + profile, fData, {headers}).subscribe((data:any) => {
+      // debugger
+      if (data.status === false){
+        this.toastr.errorToastr(data.data.error);
+        // location.reload()
+      } else {
+        this.toastr.successToastr(data.message, 'Success!', {position: 'bottom-center', toastTimeout:1000});
+        this.rateObj = new rating;
+        this.getProductsbyId();
+        // setTimeout(function () {
+        //   window.location.reload();
+        // }, 1000);
+        // location.reload();
+      }
+  },
+  err => {
+    //debugger
+    if (err && err.error && err.error){
+      const errorMesg = err.error.message;
+        this.toastr.errorToastr(errorMesg, 'Oops!', {position: 'bottom-center', toastTimeout:1000})  
+    }
+        else {
+          this.toastr.errorToastr('Something went wrong', 'Oops!', {position: 'bottom-center', toastTimeout:1000});
+        }
+  }
+  );
+  
+  }
+
   logout() {
     // this.data.logout();
     localStorage.clear();
@@ -257,7 +324,7 @@ export class ProductdetailsComponent implements OnInit {
   }
 
   config = {
-    allowNumbersOnly: false,
+    allowNumbersOnly: true,
     length: 6,
     isPasswordInput: false,
     disableAutoFocus: false,
@@ -549,6 +616,16 @@ getRecommended(){
 
 }
 
+getRecommended1(){
+  this.id = localStorage.getItem('userId');
+  this.service.getRecommended1(this.id).subscribe(
+    (data:any)=> {
+      // debugger
+    this.recommended1= data.data.recommendedProducts;
+  });
+
+}
+
 getProductsbyId1(item: any) {
   // debugger
   this.slug = item.product_slug;
@@ -563,6 +640,7 @@ getProductsbyId1(item: any) {
     // location.reload()
     const element = document.querySelector('#scrollId');
     window.scrollTo(0, 0);
+    this.quantity=1
     this.getProductsbyId();
   },
   err => {
@@ -606,6 +684,59 @@ clicked(event)
     }, 500);    
     // this.getSearchProducts();
 
+  }
+
+  favorite(item: any) {
+    // debugger
+      if(item.is_favourite === "0"){
+        this.favObj.favourite = true;
+      }
+      if(item.is_favourite === "1"){
+        this.favObj.favourite = false;
+      }
+      // this.favObj.favourite = true;
+      this.addToFavourites(item)
+    }
+    // console.log(this.quantity+1);
+
+  addToFavourites(item: any){
+    // debugger
+    this.favObj.product_id = item.product_id
+    this.favObj.user_id = localStorage.getItem('userId');
+    // this.favObj.favourite = true;
+    let fData = new FormData();
+    fData.append("product_id", this.favObj.product_id);          
+    fData.append("user_id", this.favObj.user_id);
+    fData.append("favourite", JSON.stringify(this.favObj.favourite));   
+                    
+    const headers = new HttpHeaders({ 
+      "x-api-key":"12345" ,
+    })
+    const profile = "addtofavourites";
+    this.http.post(this.baseUrl + profile, fData, {headers}).subscribe((data:any) => {
+      // debugger
+      if (data.status === false){
+        this.toastr.errorToastr(data.data.error, 'Oops!', {position: 'bottom-center', toastTimeout:1000});
+        // location.reload()
+      } else {
+        this.toastr.successToastr(data.message, 'Success!', {position: 'bottom-center', toastTimeout:1000});
+        this.favObj = new favourite;
+        this.getRecommended1();
+        // location.reload();
+      }
+  },
+  err => {
+    //debugger
+    if (err && err.error && err.error){
+      const errorMesg = err.error.message;
+        this.toastr.errorToastr(errorMesg, 'Oops!', {position: 'bottom-center', toastTimeout:1000})  
+    }
+        else {
+          this.toastr.errorToastr('Something went wrong', 'Oops!', {position: 'bottom-center', toastTimeout:1000});
+        }
+  }
+  );
+  
   }
 
 }

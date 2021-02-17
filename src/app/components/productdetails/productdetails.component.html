@@ -50,7 +50,7 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                             <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Account</a>
                             <a class="dropdown-item" [routerLink]="['/my-orders']" routerLinkActive="router-link-active">My Orders</a>
-                            <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active">My Wishlist</a>
+                            <a class="dropdown-item" [routerLink]="['/wishlist']" routerLinkActive="router-link-active">My Wishlist</a>
                             <a class="dropdown-item" [routerLink]="['/landing']" (click)="logout()">Logout</a>
                         </div>
                     </li>
@@ -242,22 +242,39 @@
                         </div>
                     </div>
                 </div>
-                <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
-
+                <div *ngIf="!isLogin">
+                    <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                    </div>
+                    <div *ngIf="isLogin">
+                        <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                        <a class="cart-data"  *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                    </div>
             </div>
 
             <div class="col-md-6">
                 <div class="product-allstory">
                     <h3 class="product-name">{{item?.product_title}}</h3>
                     <p class="product-mrp">Product MRP: <span class="price">{{item?.product_price}}</span> <span class="offer">50% OFF</span></p>
-                    <div class="star-ratings">
-                        <span class="fa fa-star checked"></span>
+                    <ul class="star-ratings" style="list-style: none;display: flex;padding: 0;">
+                        <li *ngIf="!isLogin">
+                            <star-rating value="{{item?.rating}}" totalstars={{totalstar}} checkedcolor="yellow" uncheckedcolor="black" size="24px"
+                            readonly="true"></star-rating>
+                            
+                        </li>
+                        <li *ngIf="isLogin">
+                            <star-rating value="{{item?.rating}}" totalstars={{totalstar}} checkedcolor="yellow" uncheckedcolor="black" size="24px"
+                            readonly="false" (rate)="onRate($event, item)"></star-rating>
+                            
+                        </li>
+                        <li style="margin-top: 6px;">
+                            <span class="rate-content">({{item?.rating}} ratings)</span>
+                        </li>                        <!-- <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
-                        <span class="rate-content">(245 ratings)</span>
-                    </div>
+                        <span class="rate-content">(245 ratings)</span> -->
+                        </ul>
                     <ul class="delivary-data">
                         <li>
                             <p class="top-delivery">Delivery</p>
@@ -295,7 +312,7 @@
             <!-- <li class="ml-auto mr-2"><a class="see-more"><i class="fas fa-filter mr-2"></i> Filter</a></li> -->
             <!-- <li class=""><a class="see-more"><i class="fas fa-sort mr-2"></i> Sort</a></li> -->
         </ul>
-        <div class="row">
+        <div class="row" *ngIf="!isLogin">
             <div class="col-md-3 seller-card" *ngFor="let item of recommended; let i=index">
                 <div class="card seller-content" (click)="getProductsbyId1(item)">
                     <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
@@ -307,15 +324,52 @@
                             <li>
                                 <p class="price">INR {{item?.product_price}}</p>
                             </li>
+                            <!-- <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li> -->
                             <li class="rate-image ml-auto">
-                                <!-- <img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""> -->
+
                                 <button class="btn btn-success" id="addcartbtn">Add to cart</button>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
-                <!-- <a class="cart-data"><i class="fas fa-heart hart-image hart-image1"></i></a> -->
+                <div *ngIf="!isLogin">
+                    <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                    </div>
+                    <div *ngIf="isLogin">
+                        <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                        <a class="cart-data"  *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                    </div>
+                    <!-- <a class="cart-data"><i class="fas fa-heart hart-image hart-image1"></i></a> -->
+            </div>
+        </div>
+        <div class="row" *ngIf="isLogin">
+            <div class="col-md-3 seller-card" *ngFor="let item of recommended1; let i=index">
+                <div class="card seller-content" (click)="getProductsbyId1(item)">
+                    <div class="fruits-main"> <img class="card-img-top image-sell" src="{{item?.prouduct_image_url}}" alt="Card image cap">
+                    </div>
+                    <div class="card-body fruit-info">
+                        <h5 class="card-title title-name">{{item?.product_title}}</h5>
+                        <p class="card-text price-per">Price per kg </p>
+                        <ul class="price-data">
+                            <li>
+                                <p class="price">INR {{item?.product_price}}</p>
+                            </li>
+                            <!-- <li class="rate-image ml-auto"><img class="fruit-new" src="../../../assets/images/Group 31288.svg" alt=""></li> -->
+                            <li class="rate-image ml-auto">
+
+                                <button class="btn btn-success" id="addcartbtn">Add to cart</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div *ngIf="!isLogin">
+                    <a class="cart-data"><i class="far fa-heart hart-image"></i></a>
+                    </div>
+                    <div *ngIf="isLogin">
+                        <a class="cart-data" *ngIf="item?.is_favourite == '0' " (click)="favorite(item)"><i class="far fa-heart hart-image"></i></a>
+                        <a class="cart-data"  *ngIf="item?.is_favourite == '1' " (click)="favorite(item)"><i style="color: #ed1c24;" class="fas fa-heart hart-image"></i></a>    
+                    </div>
+                    <!-- <a class="cart-data"><i class="fas fa-heart hart-image hart-image1"></i></a> -->
             </div>
             <!-- <div class="col-md-3">
                 <div class="card seller-content">

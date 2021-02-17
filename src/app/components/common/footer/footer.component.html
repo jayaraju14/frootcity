@@ -8,7 +8,9 @@
                         <li *ngIf="!isLogin"><a class="footer-inside" [routerLink]="['/landing']" routerLinkActive="router-link-active">Home</a></li>
                         <li *ngIf="isLogin"><a class="footer-inside" [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a></li>
                         <li><a class="footer-inside" [routerLink]="['/aboutus']" routerLinkActive="router-link-active">About Us</a></li>
-                        <li><a class="footer-inside">Products</a></li>
+                        <li><a class="footer-inside" [routerLink]="['/all']" routerLinkActive="router-link-active">Products</a></li>
+                        <li><a class="footer-inside" [routerLink]="['/blog']" routerLinkActive="router-link-active">Blog</a></li>
+                        <li><a class="footer-inside" [routerLink]="['/news']" routerLinkActive="router-link-active">News</a></li>
 
                         <!-- <li><a class="footer-inside" >Contact Us</a></li> -->
 
@@ -19,8 +21,8 @@
                     <ul class="footer-home">
                         <li><a class="footer-inside" [routerLink]="['/support']">Support</a></li>
                         <li><a class="footer-inside" [routerLink]="['/terms']" routerLinkActive="router-link-active">Terms & Conditions</a></li>
-                        <li><a class="footer-inside" [routerLink]="['/privacy-policy']" routerLinkActive="router-link-active">Privacy & Policy</a></li> 
-                        <li><a class="footer-inside" [routerLink]="['/faqs']" >FAQs</a></li>
+                        <li><a class="footer-inside" [routerLink]="['/privacy-policy']" routerLinkActive="router-link-active">Privacy & Policy</a></li>
+                        <li><a class="footer-inside" [routerLink]="['/faqs']">FAQs</a></li>
                         <li><a class="footer-inside" [routerLink]="['/contactus']">Contact Us</a></li>
 
                     </ul>
@@ -60,5 +62,9 @@
             </div>
 
         </div>
+    </div>
+    <div class="text-center p-3 Footer_copyrights">
+        Foortcity@2021 Copyrights
+        <!-- <a class="text-dark" href="https://mdbootstrap.com/">All Rights Reserved.</a> -->
     </div>
 </section>

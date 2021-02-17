@@ -83,6 +83,10 @@ export class MyOrdersComponent implements OnInit {
   
   } 
 
+  close(){
+    this.listUsers();
+  }
+
 
 }
 
