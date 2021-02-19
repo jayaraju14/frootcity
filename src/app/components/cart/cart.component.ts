@@ -101,8 +101,9 @@ export class CartComponent implements OnInit {
           this.cartcount= data.data.count;
           this.total = data.data.total;
           this.payableAmount =  this.total * 100;
+          console.log(this.payableAmount)
       // this.image = data.data.cart_products[0].images[0].product_image_name;
- 
+ console.log(this.cartcount)
     })
   }  
 
@@ -318,15 +319,23 @@ initPay() {
     })
     const profile = "decrement";
     this.http.post(this.baseUrl + profile, fData, {headers}).subscribe((data:any) => {
-      // debugger
       if (data.status === false){
         this.toastr.errorToastr(data.data.error, 'Oops!', {position: 'bottom-center', toastTimeout:1000});
         // location.reload()
       } else {
         this.toastr.successToastr(data.message, 'Success!', {position: 'bottom-center', toastTimeout:1000});
-        this.addObj = new addcart;
-        // location.reload();
-        this.getCartDetails();
+        //delete if quantity is zero
+        if(this.addObj.quantity-1==0)
+        {
+          this.deleteItem(item)
+        }
+        else{
+          this.addObj = new addcart;
+          // location.reload();
+          this.getCartDetails();
+        }
+        
+       
       }
   },
   err => {

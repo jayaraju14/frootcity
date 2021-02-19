@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit {
     // console.log(this.quantity+1);
 
   addToFavourites(item: any){
-    // debugger
+    debugger
     this.favObj.product_id = item.product_id
     this.favObj.user_id = localStorage.getItem('userId');
     // this.favObj.favourite = true;

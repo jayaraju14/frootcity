@@ -159,6 +159,7 @@ export class ProductdetailsComponent implements OnInit {
     this.addObj.product_id = item.product_id
     this.addObj.user_id = localStorage.getItem('userId');
     this.addObj.quantity = this.quantity;
+   console.log(item)
     let fData = new FormData();
     fData.append("product_id", this.addObj.product_id);          
     fData.append("user_id", this.addObj.user_id);  
@@ -170,10 +171,13 @@ export class ProductdetailsComponent implements OnInit {
     const profile = "addcart";
     this.http.post(this.baseUrl + profile, fData, {headers}).subscribe((data:any) => {
       // debugger
+      // console.log(data)
+     
       if (data.status === false){
         this.toastr.errorToastr(data.data.error);
         // location.reload()
       } else {
+      
         this.toastr.successToastr(data.message, 'Success!', {position: 'bottom-center', toastTimeout:1000});
         this.addObj = new addcart;
         this.getCartDetails();
